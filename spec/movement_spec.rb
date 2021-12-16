@@ -63,6 +63,50 @@ describe 'Movement' do
       
       expect(movement(world, robots).count).to eq(2)
     end
+
+    it "go NORTH & get LOST" do
+      robots = [
+        {
+          initial: {x: 0, y: 5, direction: 'N'},
+          movements: ['F','L','L','F']
+        }
+      ]
+
+      expect(movement(world, robots)).to eq([{x: 0, y: 5, direction: "N", is_lost: true}])
+    end
+
+    it "go EAST & get LOST" do
+      robots = [
+        {
+          initial: {x: 5, y: 0, direction: 'E'},
+          movements: ['F','L','L','F']
+        }
+      ]
+
+      expect(movement(world, robots)).to eq([{x: 5, y: 0, direction: "E", is_lost: true}])
+    end
+
+    it "go SOUTH & get LOST" do
+      robots = [
+        {
+          initial: {x: 0, y: 0, direction: 'S'},
+          movements: ['F','L','L','F']
+        }
+      ]
+
+      expect(movement(world, robots)).to eq([{x: 0, y: 0, direction: "S", is_lost: true}])
+    end
+
+    it "go WEST & get LOST" do
+      robots = [
+        {
+          initial: {x: 0, y: 0, direction: 'W'},
+          movements: ['F','L','L','F']
+        }
+      ]
+
+      expect(movement(world, robots)).to eq([{x: 0, y: 0, direction: "W", is_lost: true}])
+    end
   end
 
   describe "Turns RIGHT 90 degrees" do
