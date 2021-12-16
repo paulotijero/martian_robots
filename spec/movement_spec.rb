@@ -342,5 +342,29 @@ describe 'Decorate output' do
 
     expect(decorate_output(world, robots)).to eq(['1 1 E','3 3 N LOST','2 3 S'])
   end
+
+  it "Sample test" do
+    skip 'this is an example so you can use it in your tests.' do
+      world = {x: 5, y: 3} # Dimensions of the planet 'Cartesian plane'
+      # Ordered list of robots on the new planet with their starting points and movements.
+      robots = [
+        {
+          initial: {x: 1, y: 1, direction: 'E'},
+          movements: ['R','F','R','F','R','F','R','F']
+        },
+        {
+          initial: {x: 3, y: 2, direction: 'N'},
+          movements: ['F','R','R','F','L','L','F','F','R','R','F','L','L']
+        },
+        {
+          initial: {x: 0, y: 3, direction: 'W'},
+          movements: ['L','L','F','F','F','L','F','L','F','L']
+        }
+      ]
+  
+      # Expected output according to the definition of the exercise
+      expect(decorate_output(world, robots)).to eq(['1 1 E','3 3 N LOST','2 3 S'])
+    end
+  end
   
 end
