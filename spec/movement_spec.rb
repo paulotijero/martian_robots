@@ -63,7 +63,124 @@ describe 'Movement' do
       
       expect(movement(world, robots).count).to eq(2)
     end
+  end
+
+  describe "Turns RIGHT 90 degrees" do
+    world = {x: 2, y: 2}
     
+    it "From NORTH to EAST" do
+      robots = [
+        {
+          initial: {x: 1, y: 1, direction: 'N'},
+          movements: ["R"]
+        }
+      ]
+
+      expect(movement(world, robots).first[:direction]).to eq('E')
+    end
+
+    it "From EAST to SOUTH" do
+      robots = [
+        {
+          initial: {x: 1, y: 1, direction: 'E'},
+          movements: ["R"]
+        }
+      ]
+
+      expect(movement(world, robots).first[:direction]).to eq('S')
+    end
+
+    it "From SOUTH to WEST" do
+      robots = [
+        {
+          initial: {x: 1, y: 1, direction: 'S'},
+          movements: ["R"]
+        }
+      ]
+
+      expect(movement(world, robots).first[:direction]).to eq('W')
+    end
+
+    it "From WEST to NORTH" do
+      robots = [
+        {
+          initial: {x: 1, y: 1, direction: 'W'},
+          movements: ["R"]
+        }
+      ]
+
+      expect(movement(world, robots).first[:direction]).to eq('N')
+    end
+
+    it "From NORTH to SOUTH" do
+      robots = [
+        {
+          initial: {x: 1, y: 1, direction: 'N'},
+          movements: ["R","R"]
+        }
+      ]
+
+      expect(movement(world, robots).first[:direction]).to eq('S')
+    end
+  end
+
+  describe "Turns LEFT 90 degrees" do
+    world = {x: 2, y: 2}
+    
+    it "From NORTH to WEST" do
+      robots = [
+        {
+          initial: {x: 1, y: 1, direction: 'N'},
+          movements: ["L"]
+        }
+      ]
+
+      expect(movement(world, robots).first[:direction]).to eq('W')
+    end
+
+    it "From WEST to SOUTH" do
+      robots = [
+        {
+          initial: {x: 1, y: 1, direction: 'W'},
+          movements: ["L"]
+        }
+      ]
+
+      expect(movement(world, robots).first[:direction]).to eq('S')
+    end
+
+    it "From SOUTH to EAST" do
+      robots = [
+        {
+          initial: {x: 1, y: 1, direction: 'S'},
+          movements: ["L"]
+        }
+      ]
+
+      expect(movement(world, robots).first[:direction]).to eq('E')
+    end
+
+    it "From EAST to NORTH" do
+      robots = [
+        {
+          initial: {x: 1, y: 1, direction: 'E'},
+          movements: ["L"]
+        }
+      ]
+
+      expect(movement(world, robots).first[:direction]).to eq('N')
+    end
+
+    it "From EAST to WEST" do
+      robots = [
+        {
+          initial: {x: 1, y: 1, direction: 'E'},
+          movements: ["L","L"]
+        }
+      ]
+
+      expect(movement(world, robots).first[:direction]).to eq('W')
+    end
   end
 
 end
