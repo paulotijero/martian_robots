@@ -3,10 +3,11 @@ def movement(rectangular_world, robots)
   lost_trace = []
   
   robots.each do |robot|
+    robot[:initial][:direction].upcase!
     position = robot[:initial]
 
     robot[:movements].each do |movement|
-      case movement
+      case movement.upcase
       when 'R'
         case position[:direction]
         when 'N'
@@ -19,6 +20,7 @@ def movement(rectangular_world, robots)
           position[:direction] = 'N'
         else
           'ilegal direction'
+          break;
         end
       when 'L'
         case position[:direction]
@@ -32,6 +34,7 @@ def movement(rectangular_world, robots)
           position[:direction] = 'S'
         else
           'ilegal direction'
+          break;
         end
       when 'F'
         case position[:direction]
@@ -73,9 +76,11 @@ def movement(rectangular_world, robots)
           position[:x] = position[:x] - 1 unless(lost_trace.include?(position))
         else
           'ilegal Forward'
+          break;
         end
       else
         "ilegal movement"
+        break;
       end
     end
 
