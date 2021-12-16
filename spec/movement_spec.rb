@@ -291,4 +291,56 @@ describe 'Movement' do
     end
   end
 
+  describe "Criteria accepted" do
+
+    it "First sample" do
+      world = {x: 5, y: 3}
+      robots = [
+        {
+          initial: {x: 1, y: 1, direction: 'E'},
+          movements: ['R','F','R','F','R','F','R','F']
+        },
+        {
+          initial: {x: 3, y: 2, direction: 'N'},
+          movements: ['F','R','R','F','L','L','F','F','R','R','F','L','L']
+        },
+        {
+          initial: {x: 0, y: 3, direction: 'W'},
+          movements: ['L','L','F','F','F','L','F','L','F','L']
+        }
+      ]
+  
+      expect(movement(world, robots)).to eq([
+        {x: 1, y: 1, direction: 'E'},
+        {x: 3, y: 3, direction: 'N', is_lost: true},
+        {x: 2, y: 3, direction: 'S'}
+      ])
+    end
+
+  end
+
+end
+
+describe 'Decorate output' do
+
+  it "First sample to criteria accepted" do
+    world = {x: 5, y: 3}
+    robots = [
+      {
+        initial: {x: 1, y: 1, direction: 'E'},
+        movements: ['R','F','R','F','R','F','R','F']
+      },
+      {
+        initial: {x: 3, y: 2, direction: 'N'},
+        movements: ['F','R','R','F','L','L','F','F','R','R','F','L','L']
+      },
+      {
+        initial: {x: 0, y: 3, direction: 'W'},
+        movements: ['L','L','F','F','F','L','F','L','F','L']
+      }
+    ]
+
+    expect(decorate_output(world, robots)).to eq(['1 1 E','3 3 N LOST','2 3 S'])
+  end
+  
 end

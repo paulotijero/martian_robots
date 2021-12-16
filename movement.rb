@@ -84,3 +84,9 @@ def movement(rectangular_world, robots)
 
   final_positions
 end
+
+def decorate_output(rectangular_world, robots)
+  output = movement(rectangular_world, robots)
+  output_values = output.map{ |out| out.values }
+  output_values.map{|val| p val.join(' ').gsub("true",'LOST')}
+end
