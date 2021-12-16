@@ -227,4 +227,68 @@ describe 'Movement' do
     end
   end
 
+  describe "Ignore traces lost" do
+    world = {x: 2, y: 2}
+
+    it "Ignore the lost trace to the NORTH" do
+      robots = [
+        {
+          initial: {x: 0, y: 2, direction: 'N'},
+          movements: ['F','L','L','F']
+        },
+        {
+          initial: {x: 0, y: 2, direction: 'N'},
+          movements: ['F','L','L','F']
+        }
+      ]
+
+      expect(movement(world, robots).last).to eq({x: 0, y: 1, direction: 'S'})
+    end
+
+    it "Ignore the lost trace to the EAST" do
+      robots = [
+        {
+          initial: {x: 2, y: 0, direction: 'E'},
+          movements: ['F','L','L','F']
+        },
+        {
+          initial: {x: 2, y: 0, direction: 'E'},
+          movements: ['F','L','L','F']
+        }
+      ]
+
+      expect(movement(world, robots).last).to eq({x: 1, y: 0, direction: 'W'})
+    end
+
+    it "Ignore the lost trace to the SOUTH" do
+      robots = [
+        {
+          initial: {x: 0, y: 0, direction: 'S'},
+          movements: ['F','L','L','F']
+        },
+        {
+          initial: {x: 0, y: 0, direction: 'S'},
+          movements: ['F','L','L','F']
+        }
+      ]
+
+      expect(movement(world, robots).last).to eq({x: 0, y: 1, direction: 'N'})
+    end
+
+    it "Ignore the lost trace to the WEST" do
+      robots = [
+        {
+          initial: {x: 0, y: 0, direction: 'W'},
+          movements: ['F','L','L','F']
+        },
+        {
+          initial: {x: 0, y: 0, direction: 'W'},
+          movements: ['F','L','L','F']
+        }
+      ]
+
+      expect(movement(world, robots).last).to eq({x: 1, y: 0, direction: 'E'})
+    end
+  end
+
 end

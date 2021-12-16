@@ -1,6 +1,6 @@
 def movement(rectangular_world, robots)
   final_positions = []
-  traces_lost = []
+  lost_trace = []
   
   robots.each do |robot|
     position = robot[:initial]
@@ -37,32 +37,40 @@ def movement(rectangular_world, robots)
         case position[:direction]
         when 'N'
           if(rectangular_world[:y] < position[:y] + 1)
-            traces_lost << position
-            position[:is_lost] = true
-            break;
+            unless(lost_trace.include?(position))
+              lost_trace << position.clone
+              position[:is_lost] = true
+              break;
+            end
           end
-          position[:y] = position[:y] + 1
+          position[:y] = position[:y] + 1 unless(lost_trace.include?(position))
         when 'E'
           if(rectangular_world[:x] < position[:x] + 1)
-            traces_lost << position
-            position[:is_lost] = true
-            break;
+            unless(lost_trace.include?(position))
+              lost_trace << position.clone
+              position[:is_lost] = true
+              break;
+            end
           end
-          position[:x] = position[:x] + 1
+          position[:x] = position[:x] + 1 unless(lost_trace.include?(position))
         when 'S'
           if( 0 > position[:y] - 1)
-            traces_lost << position
-            position[:is_lost] = true
-            break;
+            unless(lost_trace.include?(position))
+              lost_trace << position.clone
+              position[:is_lost] = true
+              break;
+            end
           end
-          position[:y] = position[:y] - 1
+          position[:y] = position[:y] - 1 unless(lost_trace.include?(position))
         when 'W'
           if( 0 > position[:x] - 1)
-            traces_lost << position
-            position[:is_lost] = true
-            break;
+            unless(lost_trace.include?(position))
+              lost_trace << position.clone
+              position[:is_lost] = true
+              break;
+            end
           end
-          position[:x] = position[:x] - 1
+          position[:x] = position[:x] - 1 unless(lost_trace.include?(position))
         else
           'ilegal Forward'
         end
